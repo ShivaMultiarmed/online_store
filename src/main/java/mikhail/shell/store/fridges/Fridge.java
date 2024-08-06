@@ -9,6 +9,6 @@ import javax.persistence.Table;
 @Data
 @Entity @Table(name = "fridges", schema = "store_db")
 public class Fridge extends Product {
-    private int doors;
+    private Integer doors;
     private String compressor;
 }

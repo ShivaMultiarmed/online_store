@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -16,6 +17,6 @@ public class ProductType {
     private Long id;
     private String name, country, manufacturer;
     private Boolean isOnline, hasInstallment;
-    @OneToMany(cascade = ALL, mappedBy = "product_type")
-    private List<Product> products;
+    //@OneToMany(cascade = PERSIST, mappedBy = "productType")
+    //private List<Product> products;
 }

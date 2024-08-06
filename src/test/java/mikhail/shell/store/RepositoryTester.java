@@ -19,23 +19,27 @@ class RepositoryTester {
     private TVRepository tvRepository;
     @Autowired
     private FridgesRepository fridgesRepository;
+    @Autowired
+    private ProductTypeRepository productTypeRepository;
     @Test
     void testTVRepositoryGettingAllTVs()
     {
-        final List<TV> all = tvRepository.findAll();
+        final List<ProductType> all = productTypeRepository.findAll();
         assertNotNull(all);
     }
     @Test
     void testCreate()
     {
-        /* TV tv = new TV();
+         TV tv = new TV();
         tv.setName("Xiaomi 5000");
-        tv.setPrice(599);
-        tv = tvRepository.save(tv); */
-        Fridge fridge = new Fridge();
-        fridge.setName("LG 9000");
-        fridge = fridgesRepository.save(fridge);
-        assertNotNull(fridge.getId());
+        tv.setPrice(599.0);
+        tv = tvRepository.save(tv);
+
+        /*Fridge fridge = new Fridge();
+        fridge.setName("LG 100500");
+        fridge.setProduct_type(2L);
+        fridge = fridgesRepository.save(fridge);*/
+        assertNotNull(tv.getId());
     }
     @Test
     void testUpdatingTV()
