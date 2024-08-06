@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: store
+  datasource:
+    url: jdbc:postgresql://localhost:5432/store_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+
+
