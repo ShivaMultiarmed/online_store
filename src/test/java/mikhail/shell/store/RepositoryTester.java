@@ -1,8 +1,7 @@
 package mikhail.shell.store;
 
 import mikhail.shell.store.fridges.Fridge;
-import mikhail.shell.store.fridges.FridgesRepository;
-import mikhail.shell.store.tvs.TVRepository;
+import mikhail.shell.store.tvs.TV;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class RepositoryTester {
     @Autowired
-    private TVRepository tvRepository;
+    private ProductRepository<TV> tvRepository;
     @Autowired
-    private FridgesRepository fridgesRepository;
+    private ProductRepository<Fridge> fridgesRepository;
     @Autowired
     private ProductTypeRepository productTypeRepository;
 

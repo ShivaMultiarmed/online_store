@@ -1,4 +1,4 @@
-package mikhail.shell.store.computers;
+package mikhail.shell.store.fridges;
 
 import mikhail.shell.store.ProductRepository;
 import mikhail.shell.store.smartphones.SmartPhone;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManagerFactory;
 
 @Repository
-public class ComputerRepository extends ProductRepository<Computer> {
+public class FridgeRepository extends ProductRepository<Fridge> {
     @Autowired
-    public ComputerRepository(final EntityManagerFactory entityManagerFactory)
+    public FridgeRepository(final EntityManagerFactory entityManagerFactory)
     {
         super(entityManagerFactory);
-        klass = Computer.class;
+        klass = Fridge.class;
     }
 }
