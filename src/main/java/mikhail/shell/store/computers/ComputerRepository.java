@@ -1,20 +1,19 @@
-package mikhail.shell.store.tvs;
+package mikhail.shell.store.computers;
 
 import mikhail.shell.store.DBRepository;
 import mikhail.shell.store.ProductRepository;
-import mikhail.shell.store.smartphones.SmartPhone;
+import mikhail.shell.store.fridges.Fridge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
 
 @Repository
-public class TVRepository extends DBRepository<TV> {
+public class ComputerRepository extends DBRepository<Computer> {
     @Autowired
-    public TVRepository(final EntityManagerFactory entityManagerFactory)
+    public ComputerRepository(final EntityManagerFactory entityManagerFactory)
     {
         super(entityManagerFactory);
-        klass = TV.class;
+        klass = Computer.class;
     }
 }
