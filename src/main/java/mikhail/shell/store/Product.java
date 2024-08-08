@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.*;
 import static javax.persistence.InheritanceType.JOINED;
 import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
@@ -24,8 +25,6 @@ public class Product {
     private Boolean isPresent;
     private Long series;
     private Double price, width, height, length;
-//    @ManyToOne(cascade = PERSIST)
-//    @JoinColumn(name = "id", insertable = false, updatable = false)
-//    private ProductType productType;
+
     private Long product_type;
 }

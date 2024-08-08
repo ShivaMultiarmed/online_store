@@ -101,5 +101,4 @@ class RepositoryTester {
         final Long id = 23L;
         fridgesRepository.removeById(id);
     }
-
 }
