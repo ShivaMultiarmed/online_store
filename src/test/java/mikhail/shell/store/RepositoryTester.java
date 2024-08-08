@@ -82,7 +82,7 @@ class RepositoryTester {
     {
         Fridge fridge = Fridge.builder()
                 .name("Atlant 2.0")
-                .product_type(2L)
+                //.product_type(2L)
                 .build();
         fridge = fridgesRepository.create(fridge);
         assertNotNull(fridge.getId());

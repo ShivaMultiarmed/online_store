@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
@@ -24,5 +25,5 @@ public class ProductType {
     private Boolean isOnline, hasInstallment;
     @OneToMany(fetch = EAGER)
     @JoinColumn(name = "product_type")
-    private List<Product> products;
+    private Set<Product> products;
 }

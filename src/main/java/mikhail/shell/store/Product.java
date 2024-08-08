@@ -10,6 +10,7 @@ import javax.persistence.*;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.*;
 import static javax.persistence.InheritanceType.JOINED;
 import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
@@ -25,6 +26,5 @@ public class Product {
     private Boolean isPresent;
     private Long series;
     private Double price, width, height, length;
-
     private Long product_type;
 }
