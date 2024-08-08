@@ -2,14 +2,12 @@ package mikhail.shell.store;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
 public class ProductService<T extends Product> {
-    @Autowired
     protected final ProductRepository<T> repository;
     public List<T> filter(final Map<String, String> params)
     {
@@ -21,5 +19,17 @@ public class ProductService<T extends Product> {
     public T getById(final Long id)
     {
        return repository.getById(id);
+    }
+    public T create(final T product)
+    {
+        return repository.create(product);
+    }
+    public T update(final T product)
+    {
+        return repository.update(product);
+    }
+    public void removeById(final Long id)
+    {
+        repository.removeById(id);
     }
 }

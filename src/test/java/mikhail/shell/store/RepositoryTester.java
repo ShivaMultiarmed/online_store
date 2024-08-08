@@ -1,7 +1,11 @@
 package mikhail.shell.store;
 
 import mikhail.shell.store.fridges.Fridge;
+import mikhail.shell.store.fridges.FridgeRepository;
+import mikhail.shell.store.smartphones.SmartPhone;
+import mikhail.shell.store.smartphones.SmartphoneRepository;
 import mikhail.shell.store.tvs.TV;
+import mikhail.shell.store.tvs.TVRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class RepositoryTester {
     @Autowired
-    private ProductRepository<TV> tvRepository;
+    private SmartphoneRepository smartphoneRepository;
     @Autowired
-    private ProductRepository<Fridge> fridgesRepository;
+    private FridgeRepository fridgesRepository;
     @Autowired
     private ProductTypeRepository productTypeRepository;
 
@@ -69,8 +73,9 @@ class RepositoryTester {
     @Test
     void testRepositoryGet()
     {
-        final Fridge fridge = fridgesRepository.getById(15L);
-        assertNotNull(fridge);
+        //final Fridge fridge = fridgesRepository.getById(15L);
+        final SmartPhone smartPhone = smartphoneRepository.getById(19L);
+        assertNotNull(smartPhone);
     }
     @Test
     void testRepositorySave()
