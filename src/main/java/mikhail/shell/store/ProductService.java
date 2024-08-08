@@ -1,7 +1,6 @@
 package mikhail.shell.store;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
@@ -9,11 +8,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ProductService<T extends Product> {
     protected final ProductRepository<T> repository;
-    public List<T> filter(final Map<String, String> params)
+    public List<ProductType> filter(final Map<String, String> params)
     {
-        final CriteriaQueryBuilder<T> filter = repository.filter();
+        final StoreQueryBuilder<T> filter = repository.filter();
         if (params.containsKey("maxPrice"))
-            filter.lessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
+            filter.joinLessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
         return repository.collect(filter);
     }
     public T getById(final Long id)

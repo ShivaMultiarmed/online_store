@@ -16,9 +16,9 @@ import static org.springframework.http.HttpStatus.OK;
 public class ProductController<T extends Product> {
     private final ProductService<T> service;
     @GetMapping("")
-    public ResponseEntity<List<T>> filterBy(final @RequestParam Map<String, String> params)
+    public ResponseEntity<List<ProductType>> filterBy(final @RequestParam Map<String, String> params)
     {
-        final List<T> filteredList = service.filter(params);
+        final List<ProductType> filteredList = service.filter(params);
         return new ResponseEntity<>(filteredList, OK);
     }
     @GetMapping("/{id}")

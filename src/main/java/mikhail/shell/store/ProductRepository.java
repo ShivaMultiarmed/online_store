@@ -18,14 +18,14 @@ public class ProductRepository<T extends Product> {
     {
         entityManager = entityManagerFactory.createEntityManager();
     }
-    public final CriteriaQueryBuilder<T> filter()
+    public final StoreQueryBuilder<T> filter()
     {
         final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        return new CriteriaQueryBuilder<>(cb, klass);
+        return new StoreQueryBuilder<>(cb, klass);
     }
-    public final List<T> collect(final CriteriaQueryBuilder<T> builder)
+    public final List<ProductType> collect(final StoreQueryBuilder<T> builder)
     {
-        final CriteriaQuery<T> criteriaQuery = builder.build();
+        final CriteriaQuery<ProductType> criteriaQuery = builder.build();
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
     public final T getById(final Long id)

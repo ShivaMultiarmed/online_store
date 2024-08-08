@@ -4,8 +4,6 @@ import mikhail.shell.store.fridges.Fridge;
 import mikhail.shell.store.fridges.FridgeRepository;
 import mikhail.shell.store.smartphones.SmartPhone;
 import mikhail.shell.store.smartphones.SmartphoneRepository;
-import mikhail.shell.store.tvs.TV;
-import mikhail.shell.store.tvs.TVRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,10 +62,10 @@ class RepositoryTester {
     @Test
     void testFilter()
     {
-        final CriteriaQueryBuilder<Fridge> fridgeCriteriaQueryBuilder = fridgesRepository.filter()
-                .like("name", "Atlant")
-                .lessOrEqual("price", 50_000.0);
-        final List<Fridge> fridges = fridgesRepository.collect(fridgeCriteriaQueryBuilder);
+        final StoreQueryBuilder<Fridge> fridgeStoreQueryBuilder = fridgesRepository.filter()
+                .joinLike("name", "Atlant")
+                .joinLessOrEqual("price", 50_000.0);
+        final List<ProductType> fridges = fridgesRepository.collect(fridgeStoreQueryBuilder);
         assertNotNull(fridges);
     }
     @Test
