@@ -4,3 +4,6 @@
 
 В файле resources/backup.sql находится dump БД.
 Пользователь postgres, пароль postgres, БД store_db.
+
+ProductType - сущность отражающая тип товара.
+Product - родительский класс для моделей (классы Smartphone, Fridge, VacuumCleaner, TV, Computer).

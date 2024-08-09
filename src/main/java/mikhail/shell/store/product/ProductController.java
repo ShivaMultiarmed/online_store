@@ -24,7 +24,17 @@ public abstract class ProductController<T extends Product> extends AbstractContr
     @Parameters({
             @Parameter(name = "maxPrice", description = "Максимальная стоимость."),
             @Parameter(name = "minPrice", description = "Минимальная стоимость."),
-            @Parameter(name = "manufacturer", description = "Фирма-производитель.")
+            @Parameter(name = "manufacturer", description = "Фирма-производитель."),
+            @Parameter(name = "color", description = "Цвет"),
+            @Parameter(name = "name", description = "модель"),
+            @Parameter(name = "technology", description = "технология"),
+            @Parameter(name = "doors", description = "количество дверей"),
+            @Parameter(name = "cameras", description = "кол-во камер"),
+            @Parameter(name = "memory", description = "объём памяти"),
+            @Parameter(name = "processor", description = "тип процессора"),
+            @Parameter(name = "volume", description = "объём пылесоса"),
+            @Parameter(name = "modes", description = "количество режимов"),
+            @Parameter(name = "compressor", description = "тип компрессора")
     })
     @GetMapping("")
     public ResponseEntity<List<ProductType>> filterBy(
