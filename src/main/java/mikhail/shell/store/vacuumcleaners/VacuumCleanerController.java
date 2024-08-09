@@ -1,14 +1,14 @@
 package mikhail.shell.store.vacuumcleaners;
 
-import mikhail.shell.store.ProductController;
-import mikhail.shell.store.smartphones.SmartPhone;
-import mikhail.shell.store.smartphones.SmartphoneService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import mikhail.shell.store.product.ProductController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Пылесосы")
 @RestController
-@RequestMapping("/api/v3/vacuum_cleaners")
+@RequestMapping("/api/vacuum_cleaners")
 public class VacuumCleanerController extends ProductController<VacuumCleaner> {
     @Autowired
     public VacuumCleanerController(final VacuumCleanerService service) {

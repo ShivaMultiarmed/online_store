@@ -1,21 +1,15 @@
-package mikhail.shell.store;
+package mikhail.shell.store.product.type;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import mikhail.shell.store.product.Product;
 
 import javax.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data @NoArgsConstructor @SuperBuilder

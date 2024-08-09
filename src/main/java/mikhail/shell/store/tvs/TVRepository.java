@@ -1,9 +1,8 @@
 package mikhail.shell.store.tvs;
 
-import mikhail.shell.store.ProductRepository;
+import mikhail.shell.store.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
 

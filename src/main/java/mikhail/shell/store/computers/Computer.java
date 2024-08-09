@@ -3,7 +3,7 @@ package mikhail.shell.store.computers;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import mikhail.shell.store.Product;
+import mikhail.shell.store.product.Product;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

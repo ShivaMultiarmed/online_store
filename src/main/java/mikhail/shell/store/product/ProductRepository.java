@@ -1,6 +1,8 @@
-package mikhail.shell.store;
+package mikhail.shell.store.product;
 
 import lombok.extern.slf4j.Slf4j;
+import mikhail.shell.store.product.type.ProductType;
+import mikhail.shell.store.db.StoreQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -9,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 public class ProductRepository<T extends Product> {

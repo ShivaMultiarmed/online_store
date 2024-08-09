@@ -1,4 +1,4 @@
-package mikhail.shell.store;
+package mikhail.shell.store.db;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -24,7 +24,7 @@ public class StoreQueryBuilder<T> {
             predicates.add(root.get(field).in(values));
         return this;
     }
-    public StoreQueryBuilder<T> equal(final String field, final String value)
+    public StoreQueryBuilder<T> equal(final String field, final Object value)
     {
         if (value != null)
             predicates.add(cb.equal(root.get(field), value));

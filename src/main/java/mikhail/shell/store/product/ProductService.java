@@ -1,6 +1,8 @@
-package mikhail.shell.store;
+package mikhail.shell.store.product;
 
 import lombok.RequiredArgsConstructor;
+import mikhail.shell.store.product.type.ProductType;
+import mikhail.shell.store.db.StoreQueryBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ public abstract class ProductService<T extends Product> {
             filter.equal("manufacturer", params.get("manufacturer"));
         return filter;
     }
-    private StoreQueryBuilder<T> createBasicProductFilter(final Map<String, String> params)
+    private StoreQueryBuilder<T> createProductFilter(final Map<String, String> params)
     {
         final StoreQueryBuilder<T> filter = repository.filterProduct();
         if (params.containsKey("name"))
@@ -33,13 +35,9 @@ public abstract class ProductService<T extends Product> {
             filter.lessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
         if (params.containsKey("minPrice"))
             filter.greaterOrEqual("price", Double.parseDouble(params.get("minPrice")));
-        return filter;
+        return createSpecificProductFilter(params, filter);
     }
-    protected StoreQueryBuilder<T> createProductFilter(final Map<String, String> params)
-    {
-        final StoreQueryBuilder<T> filter = createBasicProductFilter(params);
-        return filter;
-    }
+    protected abstract StoreQueryBuilder<T> createSpecificProductFilter(final Map<String, String> params, final StoreQueryBuilder<T> filter);
     //protected abstract StoreQueryBuilder<T> createProductFilter(final Map<String, String> params);
     public final T getById(final Long id)
     {

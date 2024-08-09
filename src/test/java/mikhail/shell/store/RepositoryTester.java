@@ -2,13 +2,12 @@ package mikhail.shell.store;
 
 import mikhail.shell.store.fridges.Fridge;
 import mikhail.shell.store.fridges.FridgeRepository;
+import mikhail.shell.store.product.type.ProductTypeRepository;
 import mikhail.shell.store.smartphones.SmartPhone;
 import mikhail.shell.store.smartphones.SmartphoneRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

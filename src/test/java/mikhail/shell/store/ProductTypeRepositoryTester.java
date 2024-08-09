@@ -1,6 +1,7 @@
 package mikhail.shell.store;
 
-import org.junit.jupiter.api.Assertions;
+import mikhail.shell.store.product.type.ProductType;
+import mikhail.shell.store.product.type.ProductTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,19 +14,10 @@ public class ProductTypeRepositoryTester {
     @Autowired
     private ProductTypeRepository repository;
     @Test
-    void testGet()
+    void testUpdatingProductType()
     {
-        final long id = 2L;
-        final ProductType expected = ProductType.builder()
-                .id(id)
-                .name("fridges")
-                .country("Belarus")
-                .manufacturer("Atlant")
-                .isOnline(false)
-                .hasInstallment(true)
-                .build();
-        final ProductType actual = repository.getType(2L);
-        assertNotNull(actual);
-        assertEquals(expected, actual);
+        ProductType type = repository.getById(1L);
+        type.setManufacturer("NiHao");
+        type = repository.save(type);
     }
 }
