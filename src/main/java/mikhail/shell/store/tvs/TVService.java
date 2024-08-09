@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public class TVService extends ProductService<TV> {
     @Autowired
     public TVService(final TVRepository repository) {
-        super(repository);
+        super(repository, "tvs");
     }
 }

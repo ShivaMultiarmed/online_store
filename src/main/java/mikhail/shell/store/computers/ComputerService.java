@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public class ComputerService extends ProductService<Computer> {
     @Autowired
     public ComputerService(final ComputerRepository repository) {
-        super(repository);
+        super(repository, "computers");
     }
 }

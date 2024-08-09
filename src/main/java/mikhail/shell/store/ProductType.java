@@ -7,6 +7,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +25,8 @@ public class ProductType {
     private Long id;
     private String name, country, manufacturer;
     private Boolean isOnline, hasInstallment;
-    @OneToMany(fetch = EAGER)
-    @JoinColumn(name = "product_type")
-    private Set<Product> products;
+    //@OneToMany(fetch = EAGER)
+    //@JoinColumn(name = "product_type")
+    @Transient
+    private List<Product> products = new ArrayList<>();
 }

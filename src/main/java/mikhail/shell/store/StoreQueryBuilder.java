@@ -1,74 +1,55 @@
 package mikhail.shell.store;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreQueryBuilder<T extends Product> {
+public class StoreQueryBuilder<T> {
     private final CriteriaBuilder cb;
-    private final CriteriaQuery<ProductType> criteriaQuery;
-    private final Root<ProductType> productTypeRoot;
-    private final Join<ProductType, T> joinedProduct;
+    private final CriteriaQuery<T> criteriaQuery;
+    private final Root<T> root;
     private final List<Predicate> predicates = new ArrayList<>();
     public StoreQueryBuilder(final CriteriaBuilder cb, final Class<T> klass)
     {
         this.cb = cb;
-        criteriaQuery = cb.createQuery(ProductType.class);
-        productTypeRoot = criteriaQuery.from(ProductType.class);
-        joinedProduct = productTypeRoot.join("products");
+        criteriaQuery = cb.createQuery(klass);
+        root = criteriaQuery.from(klass);
     }
-    public StoreQueryBuilder<T> rootEquals(final String field, final String value)
+    public StoreQueryBuilder<T> in(final String field, final List<Long> values)
     {
-        if (value != null)
-            predicates.add(cb.equal(productTypeRoot.get(field), value));
+        if (values != null)
+            predicates.add(root.get(field).in(values));
         return this;
     }
-    public StoreQueryBuilder<T> rootLike(final String field, final String value)
+    public StoreQueryBuilder<T> equal(final String field, final String value)
     {
         if (value != null)
-            predicates.add(cb.like(productTypeRoot.get(field), "%" + value + "%"));
+            predicates.add(cb.equal(root.get(field), value));
         return this;
     }
-    public <V extends Comparable<? super V>> StoreQueryBuilder<T> rootLessOrEqual(final String field, final V value)
+    public StoreQueryBuilder<T> like(final String field, final String value)
     {
         if (value != null)
-            predicates.add(cb.lessThanOrEqualTo(productTypeRoot.get(field), value));
+            predicates.add(cb.like(root.get(field), "%" + value + "%"));
         return this;
     }
-    public <V extends Comparable<? super V>> StoreQueryBuilder<T> rootGreaterOrEqual(final String field, final V value)
+    public <V extends Comparable<? super V>> StoreQueryBuilder<T> lessOrEqual(final String field, final V value)
     {
         if (value != null)
-            predicates.add(cb.greaterThanOrEqualTo(productTypeRoot.get(field), value));
+            predicates.add(cb.lessThanOrEqualTo(root.get(field), value));
         return this;
     }
-    public StoreQueryBuilder<T> joinEquals(final String field, final String value)
+    public <V extends Comparable<? super V>> StoreQueryBuilder<T> greaterOrEqual(final String field, final V value)
     {
         if (value != null)
-            predicates.add(cb.equal(joinedProduct.get(field), value));
+            predicates.add(cb.greaterThanOrEqualTo(root.get(field), value));
         return this;
     }
-    public StoreQueryBuilder<T> joinLike(final String field, final String value)
+    public CriteriaQuery<T> build()
     {
-        if (value != null)
-            predicates.add(cb.like(joinedProduct.get(field), "%" + value + "%"));
-        return this;
-    }
-    public <V extends Comparable<? super V>> StoreQueryBuilder<T> joinLessOrEqual(final String field, final V value)
-    {
-        if (value != null)
-            predicates.add(cb.lessThanOrEqualTo(joinedProduct.get(field), value));
-        return this;
-    }
-    public <V extends Comparable<? super V>> StoreQueryBuilder<T> joinGreaterOrEqual(final String field, final V value)
-    {
-        if (value != null)
-            predicates.add(cb.greaterThanOrEqualTo(joinedProduct.get(field), value));
-        return this;
-    }
-    public CriteriaQuery<ProductType> build()
-    {
-        return criteriaQuery.select(productTypeRoot)
-                .where(cb.and(predicates.toArray(new Predicate[0])))
-                .distinct(true);
+        return criteriaQuery.select(root).where(cb.and(predicates.toArray(new Predicate[0]))).distinct(true);
     }
 }

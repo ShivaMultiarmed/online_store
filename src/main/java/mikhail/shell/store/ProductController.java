@@ -39,4 +39,23 @@ public class ProductController<T extends Product> {
         else
             return new ResponseEntity<>(service.create(product), OK);
     }
+    @PutMapping
+    public ResponseEntity<T> update(final @RequestBody T product)
+    {
+        if (product == null)
+            return new ResponseEntity<>(BAD_REQUEST);
+        else
+            return new ResponseEntity<>(service.update(product), OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(final @PathVariable Long id)
+    {
+        if (id == null)
+            return new ResponseEntity<>(BAD_REQUEST);
+        else
+        {
+            service.removeById(id);
+            return new ResponseEntity<>(OK);
+        }
+    }
 }

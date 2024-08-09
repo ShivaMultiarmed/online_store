@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public class VacuumCleanerService extends ProductService<VacuumCleaner> {
     @Autowired
     public VacuumCleanerService(final VacuumCleanerRepository repository) {
-        super(repository);
+        super(repository, "vacuum_cleaners");
     }
 }

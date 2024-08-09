@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 public class SmartphoneService extends ProductService<SmartPhone> {
     @Autowired
     public SmartphoneService(final SmartphoneRepository repository) {
-        super(repository);
+        super(repository, "smartphones");
     }
 }

@@ -8,12 +8,14 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ProductService<T extends Product> {
     protected final ProductRepository<T> repository;
+    protected final String typeName;
     public List<ProductType> filter(final Map<String, String> params)
     {
-        final StoreQueryBuilder<T> filter = repository.filter();
+        final StoreQueryBuilder<ProductType> typeFilter = repository.filterType().equal("name", typeName);
+        final StoreQueryBuilder<T> productFilter = repository.filterProduct();
         if (params.containsKey("maxPrice"))
-            filter.joinLessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
-        return repository.collect(filter);
+            productFilter.lessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
+        return repository.collect(typeFilter, productFilter);
     }
     public T getById(final Long id)
     {

@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 public class FridgeService extends ProductService<Fridge> {
     @Autowired
     public FridgeService(final FridgeRepository repository) {
-        super(repository);
+        super(repository, "fridges");
     }
 }
