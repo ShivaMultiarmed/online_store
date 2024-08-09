@@ -10,7 +10,7 @@
 - http://localhost:8080/api/fridges
 - http://localhost:8080/api/vacuum_cleaners
 
-Более подробная документация сгенерирована и представлена на http://127.0.0.1:8080/swagger-ui/index.html
+Более подробная документация сгенерирована и представлена на http://127.0.0.1:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
 
 В файле resources/backup.sql находится dump БД.
 Пользователь postgres, пароль postgres, БД store_db.
