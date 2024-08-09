@@ -1,9 +1,16 @@
 package mikhail.shell.store.product.type;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import mikhail.shell.store.base.AbstractRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Repository
-public interface ProductTypeRepository extends JpaRepository<ProductType, Long> {
+import javax.persistence.EntityManagerFactory;
 
+@Component
+public class ProductTypeRepository extends AbstractRepository<ProductType> {
+    @Autowired
+    public ProductTypeRepository(EntityManagerFactory entityManagerFactory) {
+        super(entityManagerFactory);
+        klass = ProductType.class;
+    }
 }

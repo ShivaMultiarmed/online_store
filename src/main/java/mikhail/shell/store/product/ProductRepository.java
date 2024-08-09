@@ -1,11 +1,11 @@
 package mikhail.shell.store.product;
 
 import lombok.extern.slf4j.Slf4j;
+import mikhail.shell.store.base.AbstractRepository;
 import mikhail.shell.store.product.type.ProductType;
 import mikhail.shell.store.db.StoreQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -13,13 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class ProductRepository<T extends Product> {
-    protected final EntityManager entityManager;
-    protected Class<T> klass;
+public abstract class ProductRepository<T extends Product> extends AbstractRepository<T> {
     @Autowired
     public ProductRepository(final EntityManagerFactory entityManagerFactory)
     {
-        entityManager = entityManagerFactory.createEntityManager();
+        super(entityManagerFactory);
     }
     public final StoreQueryBuilder<ProductType> filterType()
     {
@@ -51,32 +49,5 @@ public class ProductRepository<T extends Product> {
         });
 
         return typeList;
-    }
-    public final T getById(final Long id)
-    {
-        return entityManager.find(klass, id);
-    }
-    public final T create(T product)
-    {
-        entityManager.getTransaction().begin();
-        entityManager.persist(product);
-        entityManager.getTransaction().commit();
-        return product;
-    }
-    public final T update(T product)
-    {
-        entityManager.getTransaction().begin();
-        entityManager.merge(product);
-        entityManager.getTransaction().commit();
-        return product;
-    }
-    public final void removeById(final Long id)
-    {
-        entityManager.getTransaction().begin();
-        final T product = getById(id);
-        if (product == null)
-            return;
-        entityManager.remove(product);
-        entityManager.getTransaction().commit();
     }
 }
