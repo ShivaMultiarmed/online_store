@@ -39,8 +39,14 @@ public class ProductRepository<T extends Product> {
         final List<T> productList = entityManager.createQuery(productQuery).getResultList();
 
         typeList.forEach(type -> {
-            final List<T> filteredList = productList.stream().filter(product -> product.getProduct_type() == type.getId()).collect(Collectors.toList());
-            filteredList.forEach(product -> type.getProducts().add(product));
+            type.getProducts().clear();
+            final List<T> filteredList = productList
+                    .stream().
+                    filter(product -> product.getProduct_type() == type.getId()).
+                    collect(Collectors.toList());
+            filteredList.forEach(product -> {
+                type.getProducts().add(product);
+            });
         });
 
         return typeList;

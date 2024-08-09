@@ -6,30 +6,54 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class ProductService<T extends Product> {
+public abstract class ProductService<T extends Product> {
     protected final ProductRepository<T> repository;
     protected final String typeName;
-    public List<ProductType> filter(final Map<String, String> params)
+    public final List<ProductType> filter(final Map<String, String> params)
     {
-        final StoreQueryBuilder<ProductType> typeFilter = repository.filterType().equal("name", typeName);
-        final StoreQueryBuilder<T> productFilter = repository.filterProduct();
-        if (params.containsKey("maxPrice"))
-            productFilter.lessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
+        final StoreQueryBuilder<ProductType> typeFilter = createTypeFilter(params);
+        final StoreQueryBuilder<T> productFilter = createProductFilter(params);
         return repository.collect(typeFilter, productFilter);
     }
-    public T getById(final Long id)
+    private StoreQueryBuilder<ProductType> createTypeFilter(final Map<String, String> params)
+    {
+        final StoreQueryBuilder<ProductType> filter = repository.filterType().equal("name", typeName);
+        if (params.containsKey("manufacturer"))
+            filter.equal("manufacturer", params.get("manufacturer"));
+        return filter;
+    }
+    private StoreQueryBuilder<T> createBasicProductFilter(final Map<String, String> params)
+    {
+        final StoreQueryBuilder<T> filter = repository.filterProduct();
+        if (params.containsKey("name"))
+            filter.like("name", params.get("name"));
+        if (params.containsKey("color"))
+            filter.equal("color", params.get("color"));
+        if (params.containsKey("maxPrice"))
+            filter.lessOrEqual("price", Double.parseDouble(params.get("maxPrice")));
+        if (params.containsKey("minPrice"))
+            filter.greaterOrEqual("price", Double.parseDouble(params.get("minPrice")));
+        return filter;
+    }
+    protected StoreQueryBuilder<T> createProductFilter(final Map<String, String> params)
+    {
+        final StoreQueryBuilder<T> filter = createBasicProductFilter(params);
+        return filter;
+    }
+    //protected abstract StoreQueryBuilder<T> createProductFilter(final Map<String, String> params);
+    public final T getById(final Long id)
     {
        return repository.getById(id);
     }
-    public T create(final T product)
+    public final T create(final T product)
     {
         return repository.create(product);
     }
-    public T update(final T product)
+    public final T update(final T product)
     {
         return repository.update(product);
     }
-    public void removeById(final Long id)
+    public final void removeById(final Long id)
     {
         repository.removeById(id);
     }
