@@ -1,101 +1,30 @@
 package mikhail.shell.store;
 
-import mikhail.shell.store.fridges.Fridge;
-import mikhail.shell.store.fridges.FridgeRepository;
-import mikhail.shell.store.product.type.ProductTypeRepository;
-import mikhail.shell.store.smartphones.SmartPhone;
-import mikhail.shell.store.smartphones.SmartphoneRepository;
+import mikhail.shell.store.models.Product;
+import mikhail.shell.store.repositories.ProductRepository;
+import mikhail.shell.store.repositories.ProductTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RepositoryTester {
     @Autowired
-    private SmartphoneRepository smartphoneRepository;
-    @Autowired
-    private FridgeRepository fridgesRepository;
+    private ProductRepository productRepository;
     @Autowired
     private ProductTypeRepository productTypeRepository;
-
-    /*@Test
-    void testTVRepositoryGettingAll() {
-        final List<Fridge> all = fridgesRepository.findAll();
-        assertNotNull(all);
-    }
-
     @Test
-    void testCreate() {
-        Fridge fridge = new Fridge();
-        fridge.setName("Atlant 0909090");
-        fridge.setProduct_type(2L);
-        fridge = fridgesRepository.save(fridge);
-        assertNotNull(fridge.getId());
-    }
-
-    @Test
-    void testUpdating() {
-        Fridge fridge = fridgesRepository.findById(23L).orElse(null);
-        fridge.setPrice(38000.0);
-        fridge = fridgesRepository.save(fridge);
-        assertNotEquals(50000.0, fridge.getPrice());
-    }
-
-    @Test
-    void testDeleting() {
-        final long[] idsToBeRemoved = {4, 5, 6};
-        Arrays.stream(idsToBeRemoved).forEach(id -> {
-            tvRepository.deleteById(id);
-            assertFalse(tvRepository.existsById(id));
-        });
-    }
-
-    @Test
-    void testGettingAllProductTypes()
+    @Transactional
+    void testGettingProduct()
     {
-        final List<ProductType> types = productTypeRepository.findAll();
-        assertNotNull(types);
-    }*/
-    @Test
-    void testFilter()
-    {
-        /*final StoreQueryBuilder<Fridge> fridgeStoreQueryBuilder = fridgesRepository.filter()
-                .productLike("name", "Atlant")
-                .productLessOrEqual("price", 50_000.0);
-        final List<ProductType> fridges = fridgesRepository.collect(fridgeStoreQueryBuilder);
-        assertNotNull(fridges);*/
-    }
-    @Test
-    void testRepositoryGet()
-    {
-        //final Fridge fridge = fridgesRepository.getById(15L);
-        final SmartPhone smartPhone = smartphoneRepository.getById(19L);
-        assertNotNull(smartPhone);
-    }
-    @Test
-    void testRepositorySave()
-    {
-        Fridge fridge = Fridge.builder()
-                .name("Atlant 2.0")
-                //.product_type(2L)
+        final Product expected = Product.builder().id(30L).name("laptop zenbook ultra").series(202402L).price(78900.0)
+                .isPresent(true).width(32.5).height(22.7).length(1.9).color("silver")//.processor("Intel i7").category("ultrabook").product_type(13L)
                 .build();
-        fridge = fridgesRepository.create(fridge);
-        assertNotNull(fridge.getId());
-    }
-    @Test
-    void testRepositoryUpdate()
-    {
-        Fridge fridge = fridgesRepository.getById(25L);
-        fridge.setPrice(40_000.0);
-        fridge = fridgesRepository.update(fridge);
-        assertEquals(40_000.0, fridge.getPrice());
-    }
-    @Test
-    void testRepositoryRemove()
-    {
-        final Long id = 23L;
-        fridgesRepository.removeById(id);
+        final Product actual = productRepository.findById(30L).orElse(null);
+        assertEquals(expected, actual);
     }
 }

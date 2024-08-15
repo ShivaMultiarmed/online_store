@@ -1,7 +1,7 @@
 package mikhail.shell.store;
 
-import mikhail.shell.store.product.type.ProductType;
-import mikhail.shell.store.product.type.ProductTypeRepository;
+import mikhail.shell.store.models.ProductType;
+import mikhail.shell.store.repositories.ProductTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

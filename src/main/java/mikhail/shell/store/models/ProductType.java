@@ -1,12 +1,12 @@
-package mikhail.shell.store.product.type;
+package mikhail.shell.store.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import mikhail.shell.store.product.Product;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Data @NoArgsConstructor @SuperBuilder
 @Entity @Table(name = "product_types", schema = "store_db")
-public class ProductType {
+public class ProductType implements Serializable {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name, country, manufacturer;
